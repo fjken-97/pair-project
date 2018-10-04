@@ -19,6 +19,7 @@ public class mainbody {
 		
 		Infile in = new Infile();
 		in.readfile(infile, weight, member, number);
+		in.writefile(outfile,number);
 		
 //		System.out.println(infile);
 //		System.out.println(outfile);

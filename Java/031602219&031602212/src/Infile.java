@@ -1,7 +1,10 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -15,10 +18,10 @@ public class Infile {
 
 	public List<Map.Entry<String,Integer>> wordsmap = new ArrayList<Map.Entry<String,Integer>>();
 	public Map<String,Integer> ver = new HashMap<String, Integer>();
-	
+	public int lines,characters,words;
 	public void readfile(String path,int w,int m,int n) {
 		
-		int w_title,w_content,lines,characters,words;
+		int w_title,w_content;
 		String strline = new String();
 		String t_str = new String();
 		String c_str = new String();
@@ -57,13 +60,13 @@ public class Infile {
 			buffReader.close();
 			
 			words = countwords(t_words.toString()+c_words.toString());
-			System.out.println("characters: " + characters);
-			System.out.println("words: " + words);
-			System.out.println("lines: " + lines);
-			for(int i=0;i<n;i++){
-				System.out.println("<"+wordsmap.get(i).getKey()+">: "+wordsmap.get(i).getValue());
-			}
-			
+//			System.out.println("characters: " + characters);
+//			System.out.println("words: " + words);
+//			System.out.println("lines: " + lines);
+//			for(int i=0;i<n;i++){
+//				System.out.println("<"+wordsmap.get(i).getKey()+">: "+wordsmap.get(i).getValue());
+//			}
+//			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -124,6 +127,23 @@ public class Infile {
 	        }
 		});
 		wordsmap = verlist;
+	}
+	
+	public void writefile(String path,int number) {
+		try {
+			Writer file = new FileWriter(path);
+			BufferedWriter out = new BufferedWriter(file);
+			out.write("characters: " + characters+"\r\n");
+			out.write("words: " + words+"\r\n");
+			out.write("lines: " + lines+"\r\n");
+			for(int i=0;i<number;i++){
+				out.write("<"+wordsmap.get(i).getKey()+">: "+wordsmap.get(i).getValue()+"\r\n");
+			}
+			out.flush(); // 把缓存区内容压入文件
+			out.close(); // 最后记得关闭文件
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 }
