@@ -17,9 +17,12 @@ public class mainbody {
 		member = Integer.parseInt(cml.member);
 		number = Integer.parseInt(cml.number);
 		
+		System.out.println("Begin.............................................");
 		Infile in = new Infile();
 		in.readfile(infile, weight, member, number);
 		in.writefile(outfile,number);
+		System.out.println("End.............................................");
+		
 		
 //		System.out.println(infile);
 //		System.out.println(outfile);

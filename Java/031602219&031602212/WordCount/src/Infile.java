@@ -19,8 +19,8 @@ public class Infile {
 	public List<Map.Entry<String,Integer>> wordsmap = new ArrayList<Map.Entry<String,Integer>>();
 	public Map<String,Integer> ver = new HashMap<String, Integer>();
 	public int lines,characters,words;
-	public void readfile(String path,int w,int m,int n) {
-		
+	
+	public void readfile(String path,int w,int m,int n) {	
 		int w_title,w_content;
 		String strline = new String();
 		String t_str = new String();
@@ -57,16 +57,14 @@ public class Infile {
 					lines++;
 				}
 			}
-			buffReader.close();
-			
+			buffReader.close();		
 			words = countwords(t_words.toString()+c_words.toString());
 //			System.out.println("characters: " + characters);
 //			System.out.println("words: " + words);
 //			System.out.println("lines: " + lines);
 //			for(int i=0;i<n;i++){
 //				System.out.println("<"+wordsmap.get(i).getKey()+">: "+wordsmap.get(i).getValue());
-//			}
-//			
+//			}			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -97,14 +95,32 @@ public class Infile {
 		Matcher mat = pat.matcher(str);
 		str = mat.replaceAll("!");				
 		String [] textArray = str.split("!+");		//按照分隔符划分
+		String v_regex = "^[a-z]{4}[a-z0-9]*$";
 		for(int i=0;i<textArray.length;i++) {
 			String temp = new String();
+			int flag = 0;
 			for(int j=0;j<length && i+j<textArray.length;j++) {
-				temp += textArray[i+j];
-				if(j!=length-1)	temp += " ";
+				Pattern v_pat = Pattern.compile(v_regex);
+				Matcher v_mat = v_pat.matcher(textArray[i+j]);
+				if(!v_mat.matches()) {
+//					temp = new String();
+					flag=1;
+					break;
+				}
+				else {
+					temp += textArray[i+j];
+					if(j!=length-1)	temp += " ";
+				}	
 			}
-			if(i+length>textArray.length)	break;
-			p_list.add(temp);
+			if(flag==0)	{
+				p_list.add(temp);
+			}
+			else {
+				flag=0;
+			}
+			if(i+length>textArray.length) {
+				break;
+			}
 		}
 		createmap(p_list,weight);
 	}
