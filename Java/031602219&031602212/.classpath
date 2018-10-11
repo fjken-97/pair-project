@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="AdditionalFuction/src"/>
+	<classpathentry kind="src" path="Spider/untitled1/src"/>
+	<classpathentry kind="src" path="WordCount/src"/>
+	<classpathentry kind="lib" path="WordCount/libs/commons-cli-1.4-javadoc.jar"/>
+	<classpathentry kind="lib" path="WordCount/libs/commons-cli-1.4-sources.jar"/>
+	<classpathentry kind="lib" path="WordCount/libs/commons-cli-1.4-test-sources.jar"/>
+	<classpathentry kind="lib" path="WordCount/libs/commons-cli-1.4-tests.jar"/>
+	<classpathentry kind="lib" path="WordCount/libs/commons-cli-1.4.jar"/>
+	<classpathentry kind="output" path="AdditionalFuction/bin"/>
+</classpath>
