@@ -20,6 +20,12 @@ public class Infile {
 	public Map<String,Integer> ver = new HashMap<String, Integer>();
 	public int lines,characters,words;
 	
+	/**
+	 * @param path
+	 * @param w
+	 * @param m
+	 * @param n
+	 */
 	public void readfile(String path,int w,int m,int n) {	
 		int w_title,w_content;
 		String strline = new String();
@@ -62,6 +68,10 @@ public class Infile {
 			System.out.println("characters: " + characters);
 			System.out.println("words: " + words);
 			System.out.println("lines: " + lines);
+			if(wordsmap.size()<n) {
+				System.out.println("The number of output words is less than then limited(10)");
+				n=wordsmap.size();
+			}
 			for(int i=0;i<n;i++){
 				System.out.println("<"+wordsmap.get(i).getKey()+">: "+wordsmap.get(i).getValue());
 			}			
@@ -70,6 +80,10 @@ public class Infile {
 		}
 	}
 	
+	/**
+	 * @param str
+	 * @return
+	 */
 	public int countwords(String str) {	
 		List<String> wordslist = new ArrayList<String>();
 		String regex ="[^0-9a-zA-Z]";	//剔除文本中的非字母和数字的部分并以！作为暂时的分隔符
@@ -88,6 +102,11 @@ public class Infile {
 		return wordslist.size();
 	}
 	
+	/**
+	 * @param str
+	 * @param weight
+	 * @param length
+	 */
 	public void phrase(String str,int weight,int length) {
 		List<String> p_list = new ArrayList<String>();
 		String regex ="[^0-9a-zA-Z]";	//剔除文本中的非字母和数字的部分并以！作为暂时的分隔符
@@ -108,11 +127,16 @@ public class Infile {
 					break;
 				}
 				else {
-					temp += textArray[i+j];
-					if(j!=length-1)	temp += " ";
+					temp += textArray[i+j];			
+//					System.out.println(textArray.length);
+//					System.out.println(i);
+//					System.out.println(j);
+//					System.out.println(temp);
+					
+					if(j!=length-1) temp += " ";	
 				}	
 			}
-			if(flag==0)	{
+			if(flag==0 && i+length-1<textArray.length)	{
 				p_list.add(temp);
 			}
 			else {
@@ -125,6 +149,10 @@ public class Infile {
 		createmap(p_list,weight);
 	}
 	
+	/**
+	 * @param list
+	 * @param weight
+	 */
 	public void createmap(List<String> list,int weight) {
 		for(String i:list){
 			if(!ver.containsKey(i))
@@ -145,6 +173,10 @@ public class Infile {
 		wordsmap = verlist;
 	}
 	
+	/**
+	 * @param path
+	 * @param number
+	 */
 	public void writefile(String path,int number) {
 		try {
 			Writer file = new FileWriter(path);
@@ -152,6 +184,10 @@ public class Infile {
 			out.write("characters: " + characters+"\r\n");
 			out.write("words: " + words+"\r\n");
 			out.write("lines: " + lines+"\r\n");
+			if(wordsmap.size()<number) {
+				System.out.println("The number of output words is less than then limited(10)");
+				number=wordsmap.size();
+			}
 			for(int i=0;i<number;i++){
 				out.write("<"+wordsmap.get(i).getKey()+">: "+wordsmap.get(i).getValue()+"\r\n");
 			}

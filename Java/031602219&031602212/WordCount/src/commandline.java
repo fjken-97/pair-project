@@ -16,6 +16,9 @@ public class commandline {
 	public String member = new String("1");
 	public String number = new String("10");
 	
+	/**
+	 * @param args
+	 */
 	public commandline(String[] args) {
 		
 		CommandLineParser parser = new BasicParser();

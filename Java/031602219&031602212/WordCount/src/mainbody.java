@@ -20,7 +20,7 @@ public class mainbody {
 		System.out.println("Begin.............................................");
 		Infile in = new Infile();
 		in.readfile(infile, weight, member, number);
-//		in.writefile(outfile,number);
+		in.writefile(outfile,number);
 		System.out.println("End.............................................");
 		
 		
