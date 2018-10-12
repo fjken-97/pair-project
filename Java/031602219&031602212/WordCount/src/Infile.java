@@ -59,12 +59,12 @@ public class Infile {
 			}
 			buffReader.close();		
 			words = countwords(t_words.toString()+c_words.toString());
-//			System.out.println("characters: " + characters);
-//			System.out.println("words: " + words);
-//			System.out.println("lines: " + lines);
-//			for(int i=0;i<n;i++){
-//				System.out.println("<"+wordsmap.get(i).getKey()+">: "+wordsmap.get(i).getValue());
-//			}			
+			System.out.println("characters: " + characters);
+			System.out.println("words: " + words);
+			System.out.println("lines: " + lines);
+			for(int i=0;i<n;i++){
+				System.out.println("<"+wordsmap.get(i).getKey()+">: "+wordsmap.get(i).getValue());
+			}			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

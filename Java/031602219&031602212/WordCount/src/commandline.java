@@ -1,4 +1,5 @@
 import org.apache.commons.cli.Options;
+
 import org.apache.commons.cli.BasicParser;
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.cli.CommandLineParser;
@@ -12,8 +13,8 @@ public class commandline {
 	public String infile = new String();
 	public String outfile = new String();
 	public String weight = new String();
-	public String member = new String();
-	public String number = new String();
+	public String member = new String("1");
+	public String number = new String("10");
 	
 	public commandline(String[] args) {
 		
@@ -29,24 +30,38 @@ public class commandline {
 		
 		try {
 			CommandLine commandline = parser.parse(options, args);
-			if(commandline.hasOption("h")) {
-				HelpFormatter formatter = new HelpFormatter();
-				formatter.printHelp("CommandLineParameters",options);
+			if (commandline.getOptions().length > 0) {
+				if(commandline.hasOption("h")) {
+					HelpFormatter formatter = new HelpFormatter();
+					formatter.printHelp("CommandLineParameters",options);
+				}
+				if(commandline.hasOption("i")) {
+					infile =  commandline.getOptionValue("i");
+				}
+				if(commandline.hasOption("o")) {
+					outfile =  commandline.getOptionValue("o");
+				}
+				if(commandline.hasOption("w")) {
+					weight =  commandline.getOptionValue("w");
+				}
+				if(commandline.hasOption("m")) {
+					member =  commandline.getOptionValue("m");
+					if(Integer.parseInt(member)<2 | Integer.parseInt(member)>10) {
+						System.err.println("ERROR_MESSAGE:THE PHRASE LENGTH OUT OF BOUNDS (2<=m<=10)");
+						System.exit(1);
+					}
+				}
+				if(commandline.hasOption("n")) {
+					number =  commandline.getOptionValue("n");
+					if(Integer.parseInt(number)>100|Integer.parseInt(number)<0) {
+						System.err.println("ERROR_MESSAGE:THE OUTPUT PHRASE LENGTH OUT OF BOUNDS (0<=n<=100)");
+						System.exit(1);
+					}
+				}
 			}
-			if(commandline.hasOption("i")) {
-				infile =  commandline.getOptionValue("i");
-			}
-			if(commandline.hasOption("o")) {
-				outfile =  commandline.getOptionValue("o");
-			}
-			if(commandline.hasOption("w")) {
-				weight =  commandline.getOptionValue("w");
-			}
-			if(commandline.hasOption("o")) {
-				member =  commandline.getOptionValue("m");
-			}
-			if(commandline.hasOption("o")) {
-				number =  commandline.getOptionValue("n");
+			else {
+				System.err.println("ERROR_MESSAGE:NO ARGS");
+				System.exit(1);
 			}
 		} catch (ParseException e) {
 			e.printStackTrace();
